@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc934ace-6eb6-42ed-996d-7018c0d187be">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="30" isBold="false"/>
+	<style name="Coluna" fontName="Arial" fontSize="12"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#FFCCFF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_cliente.`pk_id_cliente` AS tbl_cliente_pk_id_cliente,
+     tbl_cliente.`cli_nome` AS tbl_cliente_cli_nome,
+     tbl_cliente.`cli_endereco` AS tbl_cliente_cli_endereco,
+     tbl_cliente.`cli_bairro` AS tbl_cliente_cli_bairro,
+     tbl_cliente.`cli_cidade` AS tbl_cliente_cli_cidade,
+     tbl_cliente.`cli_uf` AS tbl_cliente_cli_uf,
+     tbl_cliente.`cli_cep` AS tbl_cliente_cli_cep,
+     tbl_cliente.`cli_telefone` AS tbl_cliente_cli_telefone
+FROM
+     `tbl_cliente` tbl_cliente]]>
+	</queryString>
+	<field name="tbl_cliente_pk_id_cliente" class="java.lang.Long"/>
+	<field name="tbl_cliente_cli_nome" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_endereco" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_bairro" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_cidade" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_uf" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_cep" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_telefone" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="156" y="18" width="261" height="38" uuid="a481919b-0e50-4ff0-a96b-46703fd93a14"/>
+				<text><![CDATA[Adriane Perfumaria]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="987087e5-ca8d-4def-896e-4bd20957dc0c"/>
+			</frame>
+			<staticText>
+				<reportElement style="Coluna" x="0" y="0" width="33" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="e6cf35ae-0caa-4e69-97ae-7c4ccc4c81a0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[cod.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="33" y="2" width="174" height="20" backcolor="#CCCCCC" uuid="4ba006ff-6b97-486a-b155-a97c676017c8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="207" y="2" width="139" height="20" backcolor="#CCCCCC" uuid="e46fdab7-30fb-4f73-a473-65e2050bfa62"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="346" y="2" width="41" height="20" backcolor="#CCCCCC" uuid="1cac4cef-0bfa-44c6-af52-7a63276d6a72"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="387" y="2" width="168" height="20" backcolor="#CCCCCC" uuid="9f2c2173-9d7a-43cb-9e36-9aabccc52115"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="33" height="15" uuid="c748e7f3-2048-481a-ab31-fd7941ffbdc4"/>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_pk_id_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="0" width="174" height="15" uuid="1265025e-6ed0-463e-817b-df94d2ad7594"/>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="0" width="139" height="15" uuid="ab791d2a-9501-4e28-ab4b-e199ee0e0112"/>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="0" width="41" height="15" uuid="aea7b26f-4bf6-40a8-b803-7d9955ee734f"/>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_uf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="387" y="0" width="168" height="15" uuid="15001dde-ba9b-415f-9df9-fab9bb31f4d1"/>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_telefone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="15" forecolor="#CCCCCC" uuid="7328616e-9245-4226-97c9-a6e0c98cdaf2"/>
+			</rectangle>
+			<textField>
+				<reportElement style="Detail" x="455" y="0" width="100" height="15" uuid="7c25b483-4773-409e-838f-d088cd97efbe"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Detail" x="0" y="0" width="219" height="15" uuid="485f576d-a400-4867-9c26-f9f42ddeecf4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
