@@ -2,15 +2,17 @@ package view;
 
 import controller.ControllerCliente;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 
 public class ViewCliente extends javax.swing.JFrame {
-    
+
     ControllerCliente controllerClientes = new ControllerCliente();
     ModelCliente modelClientes = new ModelCliente();
     ArrayList<ModelCliente> listaModelClientes = new ArrayList<>();
     String alterarSalvar;
-    
+
     public ViewCliente() {
         initComponents();
         carregarClientes();
@@ -40,7 +42,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         JTFtelefone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTcliente = new javax.swing.JTable();
         JBcancelar = new javax.swing.JButton();
         JBexcluir = new javax.swing.JButton();
         JBrelClientes = new javax.swing.JButton();
@@ -86,8 +88,8 @@ public class ViewCliente extends javax.swing.JFrame {
 
         JTFtelefone.setBackground(new java.awt.Color(73, 128, 231));
 
-        jTable1.setBackground(new java.awt.Color(73, 128, 231));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTcliente.setBackground(new java.awt.Color(73, 128, 231));
+        JTcliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -103,10 +105,10 @@ public class ViewCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(73, 128, 231));
-        jTable1.setSelectionBackground(new java.awt.Color(73, 128, 231));
-        jTable1.setSelectionForeground(new java.awt.Color(73, 128, 231));
-        jScrollPane1.setViewportView(jTable1);
+        JTcliente.setGridColor(new java.awt.Color(73, 128, 231));
+        JTcliente.setSelectionBackground(new java.awt.Color(73, 128, 231));
+        JTcliente.setSelectionForeground(new java.awt.Color(73, 128, 231));
+        jScrollPane1.setViewportView(JTcliente);
 
         JBcancelar.setBackground(new java.awt.Color(73, 128, 231));
         JBcancelar.setText("Cancelar");
@@ -118,6 +120,11 @@ public class ViewCliente extends javax.swing.JFrame {
 
         JBexcluir.setBackground(new java.awt.Color(73, 128, 231));
         JBexcluir.setText("Excluir");
+        JBexcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBexcluirActionPerformed(evt);
+            }
+        });
 
         JBrelClientes.setBackground(new java.awt.Color(73, 128, 231));
         JBrelClientes.setText("Rel. Clientes");
@@ -137,9 +144,19 @@ public class ViewCliente extends javax.swing.JFrame {
 
         JBalterar.setBackground(new java.awt.Color(73, 128, 231));
         JBalterar.setText("Alterar");
+        JBalterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBalterarActionPerformed(evt);
+            }
+        });
 
         JBsalvar.setBackground(new java.awt.Color(73, 128, 231));
         JBsalvar.setText("Salvar");
+        JBsalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBsalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,7 +277,7 @@ public class ViewCliente extends javax.swing.JFrame {
     private void JBnovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBnovoActionPerformed
         this.desabilitaHabilitaCampos(false);
         this.limparCampos();
-        salvarAlterar = "salvar";
+        alterarSalvar = "salvar";
     }//GEN-LAST:event_JBnovoActionPerformed
 
     private void JBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBcancelarActionPerformed
@@ -271,6 +288,70 @@ public class ViewCliente extends javax.swing.JFrame {
     private void JBrelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBrelClientesActionPerformed
         ControllerCliente.gerarRelatorioCliente();
     }//GEN-LAST:event_JBrelClientesActionPerformed
+
+    private void JBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalvarActionPerformed
+        try {
+            modelClientes.setIdCliente(Integer.parseInt(this.JTFcodigo.getText()));
+        } catch (NumberFormatException e) {
+        }
+        modelClientes.setCliNome(this.JTFnome.getText());
+        modelClientes.setCliEndereco(this.JTFendereco.getText());
+        modelClientes.setCliBairro(this.JTFbairro.getText());
+        modelClientes.setCliCidade(this.JTFcidade.getText());
+        modelClientes.setCliUf(this.JCBuf.getSelectedItem().toString());
+        modelClientes.setCliCep(this.JTFcep.getText());
+        modelClientes.setCliTelefone(this.JTFtelefone.getText());
+
+        if (alterarSalvar.equals("salvar")) {
+            if (controllerClientes.salvarClienteController(modelClientes) > 0) {
+                JOptionPane.showMessageDialog(this, "Registro salvo com sucesso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+                carregarClientes();
+                desabilitaHabilitaCampos(false);
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar registro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if (controllerClientes.atualizarClienteController(modelClientes)) {
+                JOptionPane.showMessageDialog(this, "Registro alterado com sucesso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+                carregarClientes();
+                desabilitaHabilitaCampos(false);
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao alterar registro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_JBsalvarActionPerformed
+
+    private void JBexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBexcluirActionPerformed
+        int linha = JTcliente.getSelectedRow();
+        int codigoProduto = (int) JTcliente.getValueAt(linha, 0);
+        if (controllerClientes.excluirClienteController(codigoProduto)) {
+            JOptionPane.showMessageDialog(this, "Cliente excluido com successo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+            carregarClientes();
+            //habilitarDesabilitarCampos(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir o cliente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_JBexcluirActionPerformed
+
+    private void JBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBalterarActionPerformed
+        int linha = JTcliente.getSelectedRow();
+        int codigoCliente = (int) JTcliente.getValueAt(linha, 0);
+        alterarSalvar = "alterar";
+
+        modelClientes = controllerClientes.getClienteController(codigoCliente);
+        JTFcodigo.setText(String.valueOf(modelClientes.getIdCliente()));
+        JTFnome.setText(modelClientes.getCliNome());
+        JTFendereco.setText(modelClientes.getCliEndereco());
+        JTFbairro.setText(modelClientes.getCliBairro());
+        JTFcidade.setText(modelClientes.getCliCidade());
+        JCBuf.setSelectedItem(modelClientes.getCliUf());
+        JTFcep.setText(modelClientes.getCliCep());
+        JTFtelefone.setText(modelClientes.getCliTelefone());
+
+        this.desabilitaHabilitaCampos(true);
+    }//GEN-LAST:event_JBalterarActionPerformed
 
     private void desabilitaHabilitaCampos(boolean condicao) {
         JTFnome.setEnabled(condicao);
@@ -283,8 +364,30 @@ public class ViewCliente extends javax.swing.JFrame {
         JBsalvar.setEnabled(condicao);
     }
 
-    private void limparCampos() {
+    // Carregar clientes na tabela
+    private void carregarClientes() {
+        listaModelClientes = controllerClientes.getListaClientesController();
+        DefaultTableModel modelo = (DefaultTableModel) JTcliente.getModel();
+        modelo.setNumRows(0);
 
+        int cont = listaModelClientes.size();
+        for (int i = 0; i < cont; i++) {
+            modelo.addRow(new Object[]{
+                listaModelClientes.get(i).getIdCliente(),
+                listaModelClientes.get(i).getCliNome(),
+                listaModelClientes.get(i).getCliCidade(),
+                listaModelClientes.get(i).getCliTelefone()
+            });
+        }
+    }
+
+    private void limparCampos() {
+        JTFnome.setText("");
+        JTFendereco.setText("");
+        JTFbairro.setText("");
+        JTFcidade.setText("");
+        JTFcep.setText("");
+        JTFtelefone.setText("");
     }
 
     public static void main(String args[]) {
@@ -334,6 +437,7 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JTextField JTFendereco;
     private javax.swing.JTextField JTFnome;
     private javax.swing.JTextField JTFtelefone;
+    private javax.swing.JTable JTcliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -344,6 +448,5 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,22 @@ import model.ModelCliente;
 
 public class ControllerCliente {
 
+    public static void gerarRelatorioCliente() {
+//        (List<Cliente> clients, Map<String, Integer> salesData)  {
+//            System.out.println("Generating report for clients...");
+//
+//            for (Cliente client : clients) {
+//                int totalSales = 0;
+//                if (salesData.containsKey(client.getName())) {
+//                    totalSales = salesData.get(client.getName());
+//                }
+//
+//                System.out.println("Client: " + client.getName());
+//                System.out.println("Total sales: " + totalSales);
+//            }
+//        }
+    }
+
     private DAOCliente daoCliente = new DAOCliente();
 
     /**
@@ -65,9 +81,5 @@ public class ControllerCliente {
      */
     public boolean excluirClienteController(int pIdCliente) {
         return this.daoCliente.excluirClienteDAO(pIdCliente);
-    }
-
-    public boolean gerarRelatorioCliente() {
-        return this.daoCliente.gerarRelatorioCliente();
     }
 }

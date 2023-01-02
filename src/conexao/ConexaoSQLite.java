@@ -3,12 +3,14 @@ package conexao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConexaoSQLite {
 
     private Connection conexao;
+    private ResultSet resultSet;
 
     /**
      * Conecta a um banco de dados (cria o banco se ele não existir)
@@ -93,5 +95,12 @@ public class ConexaoSQLite {
         } catch (SQLException e) {
             return null;
         }
+    }
+
+    /**
+     * @param resultSet the resultSet to set
+     */
+    public void setResultSet(ResultSet resultSet) {
+        this.resultSet = resultSet;
     }
 }

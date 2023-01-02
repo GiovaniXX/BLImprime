@@ -1,10 +1,10 @@
 package DAO;
 
-import java.util.ArrayList;
 import conexao.ConexaoSQLite;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.InputStream;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -14,7 +14,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
-public class DAOCliente {
+public class DAOCliente extends ConexaoSQLite {
 
     /**
      * Grava Cliente
@@ -59,7 +59,7 @@ public class DAOCliente {
      * @return modelCliente
      */
     public ModelCliente getClienteDAO(int pIdCliente) {
-        ModelCliente modelClientes = new ModelCliente();
+        ModelCliente modelCliente = new ModelCliente();
         try {
             this.conectar();
             this.executarSQL(
@@ -103,7 +103,7 @@ public class DAOCliente {
      * @return ModelCliente
      */
     public ModelCliente getClienteDAO(String pNomeCliente) {
-        ModelCliente modelClientes = new ModelCliente();
+        ModelCliente modelCliente = new ModelCliente();
         try {
             this.conectar();
             this.executarSQL(
@@ -138,7 +138,7 @@ public class DAOCliente {
         } finally {
             this.fecharConexao();
         }
-        return modelClientes;
+        return modelCliente;
     }
 
     /**
@@ -163,6 +163,7 @@ public class DAOCliente {
                     + "cli_telefone"
                     + " FROM "
                     + "tbl_cliente"
+                    + ";"
             );
             while (this.getResultSet().next()) {
                 modelCliente = new ModelCliente();
@@ -174,7 +175,7 @@ public class DAOCliente {
                 modelCliente.setCliUf(this.getResultSet().getString(6));
                 modelCliente.setCliCep(this.getResultSet().getString(7));
                 modelCliente.setCliTelefone(this.getResultSet().getString(8));
-                listaModelCliente.add(modelCliente);
+                listaModelClientes.add(modelCliente);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -273,5 +274,25 @@ public class DAOCliente {
         } finally {
             this.fecharConexao();
         }
+    }
+
+    private ResultSet getResultSet() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private void fecharConexao() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private void executarSQL(String string) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private boolean executarUpdateDeleteSQL(String string) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private int insertSQL(String string) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
