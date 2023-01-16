@@ -284,8 +284,8 @@ public class DAOCliente extends ConexaoSQLite {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private void executarSQL(String string) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private boolean executarSQL(String string) {
+        return conectar();
     }
 
     private boolean executarUpdateDeleteSQL(String string) {
