@@ -243,7 +243,7 @@ public class DAOCliente extends ConexaoSQLite {
         try {
             this.conectar();
             this.executarSQL(
-                    "SELECT"
+                    "SELECT "
                     + "tbl_cliente.pk_id_cliente AS tbl_cliente_pk_id_cliente,"
                     + "tbl_cliente.cli_nome AS tbl_cliente_cli_nome,"
                     + "tbl_cliente.cli_endereco AS tbl_cliente_cli_endereco,"
