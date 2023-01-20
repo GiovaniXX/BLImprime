@@ -14,7 +14,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
-public class DAOCliente extends ConexaoSQLite {
+public class DAOCliente extends ConexaoMySql {
 
     /**
      * Grava Cliente
@@ -147,7 +147,7 @@ public class DAOCliente extends ConexaoSQLite {
      * @return ArrayList
      */
     public ArrayList<ModelCliente> getListaClienteDAO() {
-        ArrayList<ModelCliente> listaModelClientes = new ArrayList<>();
+        ArrayList<ModelCliente> listaModelCliente = new ArrayList<>();
         ModelCliente modelCliente = new ModelCliente();
         try {
             this.conectar();
@@ -175,14 +175,14 @@ public class DAOCliente extends ConexaoSQLite {
                 modelCliente.setCliUf(this.getResultSet().getString(6));
                 modelCliente.setCliCep(this.getResultSet().getString(7));
                 modelCliente.setCliTelefone(this.getResultSet().getString(8));
-                listaModelClientes.add(modelCliente);
+                listaModelCliente.add(modelCliente);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             this.fecharConexao();
         }
-        return listaModelClientes;
+        return listaModelCliente;
     }
 
     /**
@@ -251,16 +251,16 @@ public class DAOCliente extends ConexaoSQLite {
                     + "tbl_cliente.cli_cidade AS tbl_cliente_cli_cidade,"
                     + "tbl_cliente.cli_uf AS tbl_cliente_cli_uf,"
                     + "tbl_cliente.cli_cep AS tbl_cliente_cli_cep,"
-                    + "tbl_cliente.cli_telefone AS tbl_cliente_cli_telefone,"
+                    + "tbl_cliente.cli_telefone AS tbl_cliente_cli_telefone"
                     + " FROM "
                     + "tbl_cliente"
             );
             JRResultSetDataSource jrrs = new JRResultSetDataSource(getResultSet());
             InputStream caminhoRelatorio = this.getClass().getClassLoader().getResourceAsStream("relatorios/todosClientes.jasper");
             JasperPrint jasperPrint = JasperFillManager.fillReport(caminhoRelatorio, new HashMap(), jrrs);
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "D:/Outros backup/NetBeansProjects(TESTES)/BLImprime/rel/relCliente.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "E:/PROJETOS DEV-GIOVANI/PROJETOS NETBEANS/P-2023/BLImprime/rel/relCliente.pdf");
 
-            File file = new File("D:/Outros backup/NetBeansProjects(TESTES)/BLImprime/rel/relCliente.pdf");
+            File file = new File("E:/PROJETOS DEV-GIOVANI/PROJETOS NETBEANS/P-2023/BLImprime/rel/relCliente.pdf");
             try {
                 Desktop.getDesktop().open(file);
             } catch (Exception e) {

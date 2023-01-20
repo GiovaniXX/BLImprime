@@ -20,7 +20,7 @@ public class ConexaoSQLite {
     public boolean conectar() {
 
         try {
-            String url = "jdbc:sqlite:";
+            String url = "jdbc:sqlite:db_ireport.sql";
 
             this.conexao = DriverManager.getConnection(url);
             System.out.println("Conectado!");

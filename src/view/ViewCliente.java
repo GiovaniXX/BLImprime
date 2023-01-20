@@ -109,6 +109,12 @@ public class ViewCliente extends javax.swing.JFrame {
         JTcliente.setSelectionBackground(new java.awt.Color(73, 128, 231));
         JTcliente.setSelectionForeground(new java.awt.Color(73, 128, 231));
         jScrollPane1.setViewportView(JTcliente);
+        if (JTcliente.getColumnModel().getColumnCount() > 0) {
+            JTcliente.getColumnModel().getColumn(0).setResizable(false);
+            JTcliente.getColumnModel().getColumn(1).setResizable(false);
+            JTcliente.getColumnModel().getColumn(2).setResizable(false);
+            JTcliente.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         JBcancelar.setBackground(new java.awt.Color(73, 128, 231));
         JBcancelar.setText("Cancelar");
