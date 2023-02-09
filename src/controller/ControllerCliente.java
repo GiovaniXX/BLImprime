@@ -67,6 +67,10 @@ public class ControllerCliente {
         return this.daoCliente.excluirClienteDAO(pIdCliente);
     }
 
+    /**
+     * 
+     * @return 
+     */
     public boolean gerarRelatorioCliente() {
         return this.daoCliente.gerarRelatorioCliente();
     }

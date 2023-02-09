@@ -4,7 +4,7 @@ import conexao.ConexaoSQLite;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.InputStream;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -14,7 +14,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
-public class DAOCliente extends ConexaoMySql {
+public class DAOCliente extends ConexaoSQLite {
 
     /**
      * Grava Cliente
@@ -216,6 +216,22 @@ public class DAOCliente extends ConexaoMySql {
         }
     }
 
+    public boolean executarUpdateDeleteSQL(String pSQL) {
+        try {
+
+            //createStatement de con para criar o Statement
+            this.setStatement(getCon().createStatement());
+
+            // Definido o Statement, executamos a query no banco de dados
+            getStatement().executeUpdate(pSQL);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Exclui Cliente
      *
@@ -274,25 +290,5 @@ public class DAOCliente extends ConexaoMySql {
         } finally {
             this.fecharConexao();
         }
-    }
-
-    private ResultSet getResultSet() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    private void fecharConexao() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    private boolean executarSQL(String string) {
-        return conectar();
-    }
-
-    private boolean executarUpdateDeleteSQL(String string) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    private int insertSQL(String string) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

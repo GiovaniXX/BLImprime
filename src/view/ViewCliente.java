@@ -292,7 +292,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_JBcancelarActionPerformed
 
     private void JBrelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBrelClientesActionPerformed
-        ControllerCliente.gerarRelatorioCliente();
+        controllerClientes.gerarRelatorioCliente();
     }//GEN-LAST:event_JBrelClientesActionPerformed
 
     private void JBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalvarActionPerformed
